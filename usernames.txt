@@ -1,7 +1,8 @@
 ### This list is used to lookup a username for a 64-bit Steam ID
 ### The 64bit Steam ID (starting with 76) is used in the server console log
-### Add one Steam ID and username per line, separated with space
+### The script will lookup the ID and add it here with the username
+### One Steam ID and username per line, separated with space
 ### Empty lines and lines starting with # or a space are ignored
 ### One example is added below
 
-76561197962623146 Whiskeyjack
+76561197962623146 Whiskey

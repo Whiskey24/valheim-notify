@@ -8,6 +8,8 @@ The script only knows of 4 events that can be parsed from the server console log
 2. Player disconnects from the server
 3. Player (re)spawns
 4. Player dies
+5. Server booting and loading a world
+6. Server shutting down
 
 ## Telegram prerequisites
 You need to create a Telegram bot, add it to a chat and retrieve the ID of the chat.
@@ -28,8 +30,6 @@ You need to create a Telegram bot, add it to a chat and retrieve the ID of the c
 - To start automatically on boot, add to cron with ``crontab -e`` and then add a line (replace with actual location of the script) ``@reboot /home/vhserver/valheim-notify/vh-notify.sh &``
 
 ## Steam usernames
-The connect and disconnect messages in the server log mention 64bit steam IDs. The scripts attempts to convert these to usernames using usernames.txt. If the script cannot find a matching Steam ID in usernames.txt, it will report ``Unknown (Steam ID)`` in the notification.
+The connect and disconnect messages in the server log mention the 64bit Steam ID of the player that connects to the server. The script will attempt to lookup the Steam ID and store the ID with username in usernames.txt. If the script cannot find a matching Steam ID in usernames.txt, it will report ``Unknown (Steam ID)`` in the notification.
 
-However, the character death and (re)spawn messages in the log mention the username explicitly, so the script parses these from the log directly.
-
-This does mean that if the username specified for a Steam ID in usernames.txt is different from the one reported in the server log, the username in the (dis)connect notification will be different from the username mentioned in the death/(re)spawn notification.
+The death and (re)spawn messages in the log mention the Valheim character name that the player entered the world with, so the script parses these from the log directly.
