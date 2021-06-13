@@ -1,12 +1,13 @@
 #!/bin/bash
 
-### The script only knows of 6 events that can be parsed from the server console log
+### The script only knows of 7 events that can be parsed from the server console log
 ### 1. Player joins
 ### 2. Player disconnects
 ### 3. Player (re)spawns
 ### 4. Player dies
-### 5. Server booting and loading a world
-### 6. Server shutting down
+### 5. All online players take some zzz's in the night and a new day begins
+### 6. Server booting and loading a world
+### 7. Server shutting down
 ###
 ### You need to configure CHATID, KEY and LOGFILE
 ###
@@ -63,9 +64,9 @@ loadnames(){
 
 loadnames
 
-tail -Fn0 $LOGFILE | \
+tail -Fqn0 $LOGFILE | \
 while read line ; do
-	echo "$line" | grep -Eq "ZDOID|handshake|Closing|Load world|OnApplicationQuit" 
+	echo "$line" | grep -Eq "ZDOID|handshake|Closing|day:|Load world|OnApplicationQuit" 
 	if [ $? = 0 ]; then
 		
 		# store $line in dedicated var as it will unexplainably get reset when a steam id is added
@@ -88,10 +89,14 @@ while read line ; do
 
                 elif [[ $line == *"Load world"* ]]; then
                         WORLDNAME=$(echo "$line"| grep -oP 'Load world \K(.+)')
-                        echo "Server booted and loaded world $WORLDNAME"
+                        send "Server booted and loaded world $WORLDNAME"
+
+                elif [[ $line == *"day:"* ]]; then
+                        DAY=$(echo "$line"| grep -oP 'day:\K(\d+)')
+                        send "All players sleep through the night. It is now day $DAY"
 
                 elif [[ $line == *"OnApplicationQuit"* ]]; then
-                        echo "Server is shutting down"
+                        send "Server is shutting down"
 
 		else
 			# Only ZOID options left, if ends with in 0:0 then player died, otherwise spawned
