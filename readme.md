@@ -26,7 +26,7 @@ You need to create a Telegram bot, add it to a chat and retrieve the ID of the c
   - KEY: the API token of your Telegram bot
   - LOGFILE: the location of your Valheim server console log
 - Make sure vh-notify.sh is executable, e.g. do ``chmod +x vh-notify.sh``
-- Add the 64-bit Steam IDs with corresponding usernames to usernames.txt
+- ~~Add the 64-bit Steam IDs with corresponding usernames to usernames.txt~~ No longer needed, the script will attempt to lookup the IDs and the usernames. But if you like you can change the names or add IDs and names, the script will not overwrite existing data in this file.
 - Start the script with ``./vh-notify.sh &``
 - To start automatically on boot, add to cron with ``crontab -e`` and then add a line (replace with actual location of the script) ``@reboot /home/vhserver/valheim-notify/vh-notify.sh &``
 
