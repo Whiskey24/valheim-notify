@@ -3,14 +3,15 @@
 Valheim Notify is a simple bash script that sends server notifications to a telegram chat. It is aimed to be simple to use and should run on most Linux flavours.
 
 ## Supported notifications
-The script only knows of 7 events that can be parsed from the server console log:
+The script only knows of 8 events that can be parsed from the server console log:
 1. Player joins the server
 2. Player disconnects from the server
 3. Player (re)spawns
 4. Player dies
 5. All online players take some zzz's in the night and a new day begins (server skips the remaining night time)
-6. Server booting and loading a world
-7. Server shutting down
+6. A random event is triggered, see https://valheim.fandom.com/wiki/Events 
+7. Server booting and loading a world
+8. Server shutting down
 
 ## Telegram prerequisites
 You need to create a Telegram bot, add it to a chat and retrieve the ID of the chat.
