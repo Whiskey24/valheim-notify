@@ -145,13 +145,14 @@ while read line ; do
 
         elif [[ $line == *"day:"* ]]; then
             DAY=$(echo "$line" | grep -oP 'day:\K(\d+)')
+	    DAY=$(($DAY + 1))
             send "All players sleep through the night. It is now day $DAY"
 
         elif [[ $line == *"OnApplicationQuit"* ]]; then
             send "Server is shutting down"
 
         elif [[ $CLINE == *"Random event"* ]]; then
-            EVENT=$(echo "$line" | grep -oP 'Random event set:\K([0-9a-zA-Z]+)')
+            EVENT=$(echo "$line" | grep -oP 'Random event set:\K([0-9a-zA-Z_]+)')
             EVENTMSG="$(eventmessage ${EVENT})"
             send $'Random event triggered!\n'"$EVENTMSG"
 
